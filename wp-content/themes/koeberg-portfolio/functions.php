@@ -43,3 +43,6 @@ add_action('after_setup_theme', 'koeberg_setup');
 
 // Include asset enqueuing
 require_once get_template_directory() . '/inc/enqueue.php';
+
+// Include custom navigation walker
+require_once get_template_directory() . '/inc/class-koeberg-nav-walker.php';

@@ -1,10 +1,16 @@
 <?php
 /**
- * Header template
+ * The header template
+ *
+ * Contains DOCTYPE, <head>, and site header with navigation.
  *
  * @package Koeberg_Portfolio
  */
 
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -19,23 +25,40 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="skip-link" href="#main-content"><?php esc_html_e( 'Skip to content', 'koeberg-portfolio' ); ?></a>
+<a class="skip-link screen-reader-text" href="#main">
+    <?php esc_html_e('Skip to content', 'koeberg-portfolio'); ?>
+</a>
 
-<div class="site-wrapper">
-    <header class="site-header">
-        <nav class="main-nav">
-            <div class="container">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-brand">
-                    <?php bloginfo('name'); ?>
-                </a>
-                <?php
-                wp_nav_menu([
-                    'theme_location' => 'primary',
-                    'container'      => false,
-                    'menu_class'     => 'nav-menu',
-                    'fallback_cb'    => false,
-                ]);
-                ?>
-            </div>
-        </nav>
-    </header>
+<header class="site-header">
+    <div class="container">
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-brand">
+            MATTHEW<span>.</span>KOEBERG
+        </a>
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle"
+               aria-label="<?php esc_attr_e('Toggle menu', 'koeberg-portfolio'); ?>"
+               aria-controls="nav-menu"
+               aria-expanded="false" />
+        <label for="nav-toggle" class="hamburger" aria-hidden="true">
+            <span class="slice"></span>
+            <span class="slice"></span>
+            <span class="slice"></span>
+        </label>
+
+        <?php
+        wp_nav_menu([
+            'theme_location'  => 'primary',
+            'container'       => 'nav',
+            'container_class' => 'nav-menu',
+            'container_id'    => 'nav-menu',
+            'menu_class'      => 'nav-links',
+            'menu_id'         => '',
+            'fallback_cb'     => false,
+            'depth'           => 1,
+            'walker'          => new Koeberg_Nav_Walker(),
+        ]);
+        ?>
+    </div>
+</header>
+
+<main id="main" class="site-main">
