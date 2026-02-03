@@ -1,18 +1,26 @@
 // ==========================================================================
 // Main SCSS Entry Point
+// Uses @use to import partials in dependency order
 // ==========================================================================
 
-// Design tokens and variables
-@use 'variables';
+// Abstracts - Design tokens, mixins, functions (available as * for global access)
+@use 'abstracts' as *;
 
-// Base reset and typography (to be expanded in Phase 2)
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+// Base - Reset and foundational styles
+@use 'base';
+
+// Layout - Site structure (populated in Phase 3)
+@use 'layout';
+
+// Components - Reusable UI elements (populated in Phase 4+)
+@use 'components';
+
+// Utilities - Helper classes
+@use 'utilities';
+
+// ==========================================================================
+// Global Styles
+// ==========================================================================
 
 html {
   scroll-behavior: smooth;
@@ -24,18 +32,16 @@ body {
   line-height: 1.6;
   color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-// Container utility
+// Container utility - max-width centered content
 .container {
   max-width: var(--container-max);
   margin-inline: auto;
   padding-inline: var(--container-padding);
 }
 
-// Placeholder content for testing
+// Placeholder content for testing (remove in production)
 .theme-test {
   padding: var(--space-xl);
   background: var(--color-bg-secondary);
