@@ -34,11 +34,11 @@ if (!defined('ABSPATH')) {
 
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-value"><?php echo esc_html('75-80%'); ?></span>
+                    <span class="stat-value"><?php echo esc_html('75-90%'); ?></span>
                     <span class="stat-label"><?php esc_html_e('Time savings', 'koeberg-portfolio'); ?></span>
                 </div>
                 <div class="stat">
-                    <span class="stat-value"><?php echo esc_html('R280K+'); ?></span>
+                    <span class="stat-value"><?php echo esc_html('R835K+'); ?></span>
                     <span class="stat-label"><?php esc_html_e('Risk identified', 'koeberg-portfolio'); ?></span>
                 </div>
                 <div class="stat">
