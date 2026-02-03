@@ -1,0 +1,70 @@
+// ==========================================================================
+// CSS Reset - Josh Comeau's Modern CSS Reset (Dec 2025)
+// Source: https://www.joshwcomeau.com/css/custom-css-reset/
+// ==========================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Exclude dialog from margin reset (allows native dialog positioning)
+*:not(dialog) {
+  margin: 0;
+}
+
+// Enable keyword animations for smooth height transitions
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Media defaults - block display prevents extra spacing
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Form elements inherit typography
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// Prevent text overflow
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+// Modern text wrapping
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
