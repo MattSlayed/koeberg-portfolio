@@ -35,6 +35,8 @@ get_header();
                 <?php get_template_part('template-parts/bio'); ?>
             </aside>
         </div>
+
+        <?php get_template_part('template-parts/skills-matrix'); ?>
     </div>
 </section>
 
