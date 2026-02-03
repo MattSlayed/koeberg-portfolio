@@ -1,0 +1,66 @@
+// ==========================================================================
+// Grid - CSS Grid page layouts and responsive utilities
+// ==========================================================================
+
+@use '../abstracts' as *;
+
+// ==========================================================================
+// Body - Fixed header clearance
+// ==========================================================================
+// Accounts for fixed header height + vertical padding
+// Header is approximately 60px height + 20px padding-block = ~100px total
+
+body {
+  padding-top: calc(60px + 40px); // header height + vertical padding
+}
+
+// ==========================================================================
+// Site Grid - Page-level layout structure
+// ==========================================================================
+
+.site-grid {
+  display: grid;
+  gap: var(--space-m);
+
+  // Mobile-first: single column
+  grid-template-columns: 1fr;
+
+  @include respond-to('md') {
+    // Tablet: adjust gap
+    gap: var(--space-l);
+  }
+
+  @include respond-to('xl') {
+    // Desktop: constrained width centered
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-padding);
+  }
+}
+
+// ==========================================================================
+// Test Grid - Responsive column demonstration
+// ==========================================================================
+// Temporary test utility for verifying breakpoint behavior
+// Will be removed after Phase 3 verification
+
+.test-grid {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: 1fr;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to('lg') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.test-col {
+  background: var(--color-bg-secondary);
+  padding: var(--space-m);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
