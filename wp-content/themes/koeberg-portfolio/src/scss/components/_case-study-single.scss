@@ -1,0 +1,251 @@
+// ==========================================================================
+// Single Case Study Styles
+// ==========================================================================
+// Two-tier structure: primary sections contain secondary category items
+// Matches the HTML reference design (matthew-portfolio-two-tier.html)
+
+@use '../abstracts' as *;
+
+// ==========================================================================
+// Container wrapper
+// ==========================================================================
+
+.case-study-single {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-3xl);
+}
+
+// ==========================================================================
+// Header section
+// ==========================================================================
+
+.case-study-header {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-l);
+  border-bottom: 1px solid var(--color-border);
+
+  .case-number {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-s);
+  }
+
+  .case-title {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: var(--space-s);
+    letter-spacing: -0.01em;
+  }
+
+  .case-client {
+    font-size: var(--step-0);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-m);
+  }
+
+  .case-tags {
+    display: flex;
+    gap: var(--space-2xs);
+    flex-wrap: wrap;
+  }
+
+  .case-tag {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    padding: var(--space-3xs) var(--space-xs);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+  }
+}
+
+// ==========================================================================
+// Content area
+// ==========================================================================
+
+.case-study-content {
+  padding-top: var(--space-l);
+}
+
+// ==========================================================================
+// Primary sections (Problem, Solution, Architecture)
+// ==========================================================================
+
+.case-primary-section {
+  margin-bottom: var(--space-xl);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.case-primary-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-m);
+  padding-bottom: var(--space-xs);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+// ==========================================================================
+// Secondary items (category content within primary sections)
+// ==========================================================================
+
+.case-secondary-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  padding-left: var(--space-m);
+  border-left: 2px solid var(--color-border);
+
+  @include respond-below('md') {
+    padding-left: var(--space-s);
+  }
+}
+
+.case-secondary-item {
+  position: relative;
+
+  // Colored dot indicator
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--space-m) - 5px);
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-text-muted);
+
+    @include respond-below('md') {
+      left: calc(-1 * var(--space-s) - 5px);
+    }
+  }
+
+  // Category color variants for dots
+  &[data-category="data"]::before {
+    background: var(--cat-data);
+  }
+
+  &[data-category="systems"]::before {
+    background: var(--cat-systems);
+  }
+
+  &[data-category="execution"]::before {
+    background: var(--cat-execution);
+  }
+
+  &[data-category="people"]::before {
+    background: var(--cat-people);
+  }
+
+  &[data-category="value"]::before {
+    background: var(--cat-value);
+  }
+
+  p {
+    font-size: var(--step-0);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+}
+
+// ==========================================================================
+// Secondary labels with category colors
+// ==========================================================================
+
+.case-secondary-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2xs);
+  padding: var(--space-3xs) var(--space-xs);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-tertiary);
+}
+
+// Category color variants for labels
+[data-category="data"] .case-secondary-label {
+  color: var(--cat-data);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+[data-category="systems"] .case-secondary-label {
+  color: var(--cat-systems);
+  background: rgba(14, 165, 233, 0.1);
+}
+
+[data-category="execution"] .case-secondary-label {
+  color: var(--cat-execution);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+[data-category="people"] .case-secondary-label {
+  color: var(--cat-people);
+  background: rgba(236, 72, 153, 0.1);
+}
+
+[data-category="value"] .case-secondary-label {
+  color: var(--cat-value);
+  background: rgba(139, 92, 246, 0.1);
+}
+
+// ==========================================================================
+// Metrics section
+// ==========================================================================
+
+.case-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-s);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-l);
+  border-top: 1px solid var(--color-border);
+
+  @include respond-below('md') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-m);
+  text-align: center;
+  transition: border-color var(--transition-base);
+
+  &:hover {
+    border-color: var(--color-border-hover);
+  }
+
+  .metric-value {
+    font-family: var(--font-mono);
+    font-size: var(--step-2);
+    font-weight: 500;
+    color: var(--color-teal);
+    margin-bottom: var(--space-3xs);
+  }
+
+  .metric-label {
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+}
