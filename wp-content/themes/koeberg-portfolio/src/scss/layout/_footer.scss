@@ -1,0 +1,48 @@
+// ==========================================================================
+// Footer - Site footer styles
+// ==========================================================================
+
+@use '../abstracts' as *;
+
+// ==========================================================================
+// Site Footer
+// ==========================================================================
+// Matches HTML template design (lines 608-630)
+// Responsive: stacks vertically below 768px
+
+.site-footer {
+  padding: 48px 0;
+  border-top: 1px solid var(--color-border);
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include respond-below('md') {
+      flex-direction: column;
+      gap: var(--space-s);
+      text-align: center;
+    }
+  }
+}
+
+// ==========================================================================
+// Footer Text
+// ==========================================================================
+
+.footer-text {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+// ==========================================================================
+// Footer Brand
+// ==========================================================================
+
+.footer-brand {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
