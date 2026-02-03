@@ -1,4 +1,7 @@
 // ==========================================================================
 // Components - Reusable UI components
 // ==========================================================================
-// Components will be added in Phase 4+
+
+@forward 'hero';
+@forward 'case-study-card';
+@forward 'case-study-single';
