@@ -46,3 +46,6 @@ require_once get_template_directory() . '/inc/enqueue.php';
 
 // Include custom navigation walker
 require_once get_template_directory() . '/inc/class-koeberg-nav-walker.php';
+
+// Include Case Study CPT registration
+require_once get_template_directory() . '/inc/cpt-case-study.php';
