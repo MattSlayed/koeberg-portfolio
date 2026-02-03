@@ -1,0 +1,8 @@
+// ==========================================================================
+// Abstracts - Design tokens, mixins, functions
+// ==========================================================================
+// Aggregates all abstract partials for easy import via @use 'abstracts'
+
+@forward 'variables';
+@forward 'mixins';
+@forward 'functions';
