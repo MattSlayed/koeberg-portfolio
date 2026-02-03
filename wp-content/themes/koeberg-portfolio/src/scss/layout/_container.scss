@@ -1,0 +1,17 @@
+// ==========================================================================
+// Container - Max-width centered content utilities
+// ==========================================================================
+// Moved from main.scss for DRY organization
+
+// Standard container - max-width with centered alignment
+.container {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+// Fluid container - full-width with padding only (no max-width)
+.container-fluid {
+  width: 100%;
+  padding-inline: var(--container-padding);
+}

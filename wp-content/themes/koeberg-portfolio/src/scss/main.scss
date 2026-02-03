@@ -34,13 +34,6 @@ body {
   background-color: var(--color-bg-primary);
 }
 
-// Container utility - max-width centered content
-.container {
-  max-width: var(--container-max);
-  margin-inline: auto;
-  padding-inline: var(--container-padding);
-}
-
 // Placeholder content for testing (remove in production)
 .theme-test {
   padding: var(--space-xl);
