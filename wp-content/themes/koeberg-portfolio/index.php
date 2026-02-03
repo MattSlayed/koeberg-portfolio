@@ -12,8 +12,9 @@ get_header();
 ?>
 
 <main id="main-content" class="site-main">
-    <div class="container">
-        <section class="design-system-test">
+    <div class="site-grid">
+        <div class="container">
+            <section class="design-system-test">
             <header class="test-header">
                 <h1>Design System Test</h1>
                 <p>Visual verification of typography, colors, and spacing.</p>
@@ -135,7 +136,28 @@ function greet(name) {
                     <div class="spacing-sample"><div style="width: var(--space-xl); height: 24px; background: var(--color-accent);"></div><span>--space-xl</span></div>
                 </div>
             </article>
+
+            <!-- Responsive Grid Test -->
+            <article class="test-section">
+                <h2>Responsive Grid Test</h2>
+                <p class="viewport-indicator">Resize browser to test breakpoints: 320px (1 col) | 768px (2 cols) | 1024px (3 cols)</p>
+                <div class="test-grid">
+                    <div class="test-col">
+                        <h4>Column 1</h4>
+                        <p>Visible at all breakpoints. Single column on mobile.</p>
+                    </div>
+                    <div class="test-col">
+                        <h4>Column 2</h4>
+                        <p>Joins column 1 in 2-column layout at 768px (md breakpoint).</p>
+                    </div>
+                    <div class="test-col">
+                        <h4>Column 3</h4>
+                        <p>Creates 3-column layout at 1024px (lg breakpoint).</p>
+                    </div>
+                </div>
+            </article>
         </section>
+        </div>
     </div>
 </main>
 
@@ -225,6 +247,16 @@ function greet(name) {
     font-family: var(--font-mono);
     font-size: var(--step--1);
     color: var(--color-text-muted);
+}
+
+.viewport-indicator {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-m);
+    padding: var(--space-s);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
 }
 </style>
 
