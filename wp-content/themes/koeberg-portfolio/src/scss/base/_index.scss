@@ -1,0 +1,7 @@
+// ==========================================================================
+// Base - Reset, typography, root styles
+// ==========================================================================
+// Aggregates base partials for import via @use 'base'
+
+@forward 'reset';
+// Typography will be added in Plan 02
