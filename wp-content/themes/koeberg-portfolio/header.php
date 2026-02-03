@@ -19,6 +19,8 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<a class="skip-link" href="#main-content"><?php esc_html_e( 'Skip to content', 'koeberg-portfolio' ); ?></a>
+
 <div class="site-wrapper">
     <header class="site-header">
         <nav class="main-nav">

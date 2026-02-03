@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-<main class="site-main">
+<main id="main-content" class="site-main">
     <div class="container">
         <div class="theme-test">
             <h1>Koeberg Portfolio</h1>
