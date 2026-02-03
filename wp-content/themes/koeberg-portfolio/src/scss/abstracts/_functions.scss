@@ -1,0 +1,26 @@
+// ==========================================================================
+// Functions - SCSS helper functions
+// ==========================================================================
+
+@use 'sass:math';
+
+// Convert pixel value to rem
+// Usage: rem(16) => 1rem
+// Assumes base font size of 16px
+@function rem($pixels) {
+  @if math.is-unitless($pixels) {
+    @return math.div($pixels, 16) * 1rem;
+  } @else {
+    @warn "Value passed to rem() should be unitless. Got: #{$pixels}";
+    @return $pixels;
+  }
+}
+
+// Strip unit from a number
+// Usage: strip-unit(16px) => 16
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not math.is-unitless($number) {
+    @return math.div($number, ($number * 0 + 1));
+  }
+  @return $number;
+}
