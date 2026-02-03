@@ -1,0 +1,67 @@
+// ==========================================================================
+// Skills Matrix - Two-column skills grid for About page
+// ==========================================================================
+
+@use '../abstracts' as *;
+
+// Skills Section
+.skills-section {
+  padding: var(--space-xl) 0;
+}
+
+// Two-column grid layout
+.skills-matrix {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// Category title
+.skills-category-title {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-m);
+}
+
+// Skills list container
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+// Individual skill item
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-s) var(--space-m);
+  transition: border-color var(--transition-base);
+
+  &:hover {
+    border-color: var(--color-accent);
+  }
+}
+
+// Skill name
+.skill-name {
+  font-size: var(--step-0);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+// Skill proficiency level
+.skill-level {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
