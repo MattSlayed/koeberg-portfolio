@@ -1,0 +1,18 @@
+/*
+Theme Name: Koeberg Portfolio
+Theme URI: https://github.com/koeberg/portfolio
+Author: Matthew Koeberg
+Author URI: https://matthewkoeberg.com
+Description: Professional consulting portfolio showcasing business intelligence and operations optimization work. Built for Big 4/MBB audience.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.8
+Requires PHP: 8.3
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: koeberg-portfolio
+Tags: portfolio, one-column, custom-colors, custom-menu
+
+This file is required by WordPress but styles are compiled via Vite.
+See assets/dist/ for compiled CSS.
+*/
