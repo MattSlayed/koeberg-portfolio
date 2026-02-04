@@ -8,7 +8,7 @@ services:
       WORDPRESS_DB_NAME: ${DB_NAME}
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
-      WORDPRESS_DEBUG: ${WP_DEBUG}
+      WORDPRESS_DEBUG: ${WP_DEBUG:-1}
     volumes:
       - wordpress_data:/var/www/html
       - ./wp-content/themes/koeberg-portfolio:/var/www/html/wp-content/themes/koeberg-portfolio
@@ -53,6 +53,13 @@ services:
       - wordpress
     networks:
       - wp-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.koeberg.rule=Host(`novatekllc.co.za`)"
+      - "traefik.http.routers.koeberg.entrypoints=https"
+      - "traefik.http.routers.koeberg.tls=true"
+      - "traefik.http.routers.koeberg.tls.certresolver=letsencrypt"
+      - "traefik.http.services.koeberg.loadbalancer.server.port=80"
 
 volumes:
   wordpress_data:
