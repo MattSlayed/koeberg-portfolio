@@ -17,6 +17,5 @@ wp-content/uploads/
 wp-content/plugins/
 wp-content/upgrade/
 
-# Theme build artifacts
-wp-content/themes/koeberg-portfolio/assets/dist/
+# Theme build artifacts (node_modules only - dist is committed for deployment)
 wp-content/themes/koeberg-portfolio/node_modules/

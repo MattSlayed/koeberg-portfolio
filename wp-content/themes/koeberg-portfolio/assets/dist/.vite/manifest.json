@@ -1,0 +1,11 @@
+{
+  "js/main.js": {
+    "file": "main-QVZHuMts.js",
+    "name": "main",
+    "src": "js/main.js",
+    "isEntry": true,
+    "css": [
+      "main-CmgabBnd.css"
+    ]
+  }
+}
