@@ -12,7 +12,9 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./wp-content/themes/koeberg-portfolio:/var/www/html/wp-content/themes/koeberg-portfolio
-      - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
+    configs:
+      - source: php_uploads
+        target: /usr/local/etc/php/conf.d/uploads.ini
     depends_on:
       db:
         condition: service_healthy
@@ -48,7 +50,9 @@ services:
     volumes:
       - wordpress_data:/var/www/html:ro
       - ./wp-content/themes/koeberg-portfolio:/var/www/html/wp-content/themes/koeberg-portfolio:ro
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/conf.d/default.conf
     depends_on:
       - wordpress
     networks:
@@ -60,6 +64,12 @@ services:
       - "traefik.http.routers.koeberg.tls=true"
       - "traefik.http.routers.koeberg.tls.certresolver=letsencrypt"
       - "traefik.http.services.koeberg.loadbalancer.server.port=80"
+
+configs:
+  nginx_conf:
+    file: ./nginx/default.conf
+  php_uploads:
+    file: ./config/uploads.ini
 
 volumes:
   wordpress_data:
