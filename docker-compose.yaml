@@ -1,6 +1,8 @@
 services:
   wordpress:
-    image: wordpress:php8.3-fpm
+    build:
+      context: .
+      dockerfile: Dockerfile.wordpress
     container_name: koeberg-wordpress
     restart: unless-stopped
     environment:
@@ -13,7 +15,6 @@ services:
       PHP_POST_MAX_SIZE: 64M
     volumes:
       - wordpress_data:/var/www/html
-      - ./wp-content/themes/koeberg-portfolio:/var/www/html/wp-content/themes/koeberg-portfolio:ro
     depends_on:
       db:
         condition: service_healthy
@@ -41,12 +42,13 @@ services:
       - wp-network
 
   nginx:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
     container_name: koeberg-nginx
     restart: unless-stopped
     volumes:
       - wordpress_data:/var/www/html:ro
-      - ./wp-content/themes/koeberg-portfolio:/var/www/html/wp-content/themes/koeberg-portfolio:ro
     depends_on:
       - wordpress
     networks:
@@ -58,40 +60,6 @@ services:
       - "traefik.http.routers.koeberg.tls=true"
       - "traefik.http.routers.koeberg.tls.certresolver=letsencrypt"
       - "traefik.http.services.koeberg.loadbalancer.server.port=80"
-    command: |
-      sh -c 'cat > /etc/nginx/conf.d/default.conf << "NGINXCONF"
-      server {
-          listen 80;
-          server_name localhost;
-          root /var/www/html;
-          index index.php index.html;
-          client_max_body_size 64M;
-
-          location / {
-              try_files $$uri $$uri/ /index.php?$$args;
-          }
-
-          location ~ \\.php$$ {
-              try_files $$uri =404;
-              fastcgi_split_path_info ^(.+\\.php)(/.+)$$;
-              fastcgi_pass wordpress:9000;
-              fastcgi_index index.php;
-              include fastcgi_params;
-              fastcgi_param SCRIPT_FILENAME $$document_root$$fastcgi_script_name;
-              fastcgi_param PATH_INFO $$fastcgi_path_info;
-              fastcgi_read_timeout 300;
-          }
-
-          location ~* \\.(css|gif|ico|jpeg|jpg|js|png|svg|webp|woff|woff2)$$ {
-              expires 1y;
-              add_header Cache-Control "public, immutable";
-          }
-
-          gzip on;
-          gzip_types text/plain text/css application/javascript application/json;
-      }
-      NGINXCONF
-      nginx -g "daemon off;"'
 
 volumes:
   wordpress_data:
