@@ -1,7 +1,17 @@
 FROM wordpress:php8.3-fpm
 
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Copy theme files to staging location (volume will overwrite /var/www/html)
 COPY wp-content/themes/koeberg-portfolio /usr/src/koeberg-portfolio
+
+# Install Carbon Fields dependencies
+WORKDIR /usr/src/koeberg-portfolio
+RUN composer install --no-dev --optimize-autoloader
+
+# Reset workdir
+WORKDIR /var/www/html
 
 # Copy and setup entrypoint script
 COPY docker/theme-entrypoint.sh /usr/local/bin/theme-entrypoint.sh

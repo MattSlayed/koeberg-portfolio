@@ -19,3 +19,6 @@ wp-content/upgrade/
 
 # Theme build artifacts (node_modules only - dist is committed for deployment)
 wp-content/themes/koeberg-portfolio/node_modules/
+
+# Composer dependencies (installed during Docker build)
+wp-content/themes/koeberg-portfolio/vendor/

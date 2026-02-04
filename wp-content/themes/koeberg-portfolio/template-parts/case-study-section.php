@@ -10,7 +10,7 @@
  * @param array $args {
  *     @type string $label Section label (e.g., "The Problem")
  *     @type array  $items Array of items, each containing:
- *         @type string $field    ACF field name
+ *         @type string $content  The content to display
  *         @type string $label    Display label for the category
  *         @type string $category Category for color coding (data, systems, execution, people, value)
  * }
@@ -35,7 +35,7 @@ $items = $args['items'] ?? array();
 // Check if any item has content
 $has_content = false;
 foreach ($items as $item) {
-    if (get_field($item['field'])) {
+    if (!empty($item['content'])) {
         $has_content = true;
         break;
     }
@@ -52,12 +52,11 @@ if (!$has_content || !$label) {
 
     <div class="case-secondary-items">
         <?php foreach ($items as $item) :
-            $field_value = get_field($item['field']);
-            if ($field_value) :
+            if (!empty($item['content'])) :
         ?>
             <div class="case-secondary-item" data-category="<?php echo esc_attr($item['category']); ?>">
                 <span class="case-secondary-label"><?php echo esc_html($item['label']); ?></span>
-                <p><?php echo wp_kses_post($field_value); ?></p>
+                <p><?php echo wp_kses_post($item['content']); ?></p>
             </div>
         <?php endif; endforeach; ?>
     </div>

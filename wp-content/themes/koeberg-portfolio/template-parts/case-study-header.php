@@ -16,9 +16,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$case_number = get_field('case_number');
-$client = get_field('client');
-$domain_tags = get_field('domain_tags');
+$post_id = get_the_ID();
+$case_number = carbon_get_post_meta($post_id, 'case_number');
+$client = carbon_get_post_meta($post_id, 'client');
+$domain_tags = carbon_get_post_meta($post_id, 'domain_tags');
 ?>
 
 <header class="case-study-header">
