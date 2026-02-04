@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import liveReload from 'vite-plugin-live-reload';
+import prismjsPlugin from 'vite-plugin-prismjs-plus';
 import { resolve } from 'path';
 
 export default defineConfig({
@@ -8,6 +9,11 @@ export default defineConfig({
       // Watch PHP files for full page reload
       resolve(__dirname, './**/*.php'),
     ]),
+    prismjsPlugin({
+      languages: ['python', 'sql', 'json', 'visual-basic'],
+      theme: 'tomorrow',
+      css: true,
+    }),
   ],
 
   // Source files are in src/
