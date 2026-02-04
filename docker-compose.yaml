@@ -44,8 +44,6 @@ services:
     image: nginx:alpine
     container_name: koeberg-nginx
     restart: unless-stopped
-    ports:
-      - "8080:80"
     volumes:
       - wordpress_data:/var/www/html:ro
       - ./wp-content/themes/koeberg-portfolio:/var/www/html/wp-content/themes/koeberg-portfolio:ro
