@@ -3,17 +3,12 @@
  * Case Study Code Samples Template Part
  *
  * Displays code samples with Prism.js syntax highlighting.
- * Handles 3 fixed code sample field groups from ACF.
+ * Uses Carbon Fields complex field for repeatable code samples.
  *
  * @package Koeberg_Portfolio
  *
- * ACF Fields used:
- * - code_1_language, code_1_title, code_1_content
- * - code_2_language, code_2_title, code_2_content
- * - code_3_language, code_3_title, code_3_content
- *
- * Language values (from ACF select): python, sql, json, vba
- * Prism.js expects: language-python, language-sql, language-json, language-vba
+ * Language values: python, sql, json, vba, javascript, php
+ * Prism.js expects: language-python, language-sql, etc.
  */
 
 // Prevent direct access
@@ -21,25 +16,29 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+$post_id = get_the_ID();
+$code_samples_raw = carbon_get_post_meta($post_id, 'code_samples');
+
 // Collect valid code samples
 $code_samples = array();
 
-// Loop through the 3 fixed code sample slots
-for ($i = 1; $i <= 3; $i++) {
-    $language = get_field("code_{$i}_language");
-    $content = get_field("code_{$i}_content");
+if (!empty($code_samples_raw)) {
+    foreach ($code_samples_raw as $sample) {
+        $language = $sample['code_language'] ?? '';
+        $content = $sample['code_content'] ?? '';
 
-    // Only include if both language AND content have values
-    if ($language && $content) {
-        $code_samples[] = array(
-            'language' => $language,
-            'title' => get_field("code_{$i}_title"),
-            'content' => $content,
-        );
+        // Only include if both language AND content have values
+        if ($language && $content) {
+            $code_samples[] = array(
+                'language' => $language,
+                'title' => $sample['code_title'] ?? '',
+                'content' => $content,
+            );
+        }
     }
 }
 
-// Early return if no valid samples (no empty section markup)
+// Early return if no valid samples
 if (empty($code_samples)) {
     return;
 }

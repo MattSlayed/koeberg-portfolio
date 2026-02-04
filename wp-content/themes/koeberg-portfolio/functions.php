@@ -50,7 +50,5 @@ require_once get_template_directory() . '/inc/class-koeberg-nav-walker.php';
 // Include Case Study CPT registration
 require_once get_template_directory() . '/inc/cpt-case-study.php';
 
-// Include ACF Local JSON setup (only if ACF is active)
-if (class_exists('ACF')) {
-    require_once get_template_directory() . '/inc/acf-setup.php';
-}
+// Include Carbon Fields setup (free ACF alternative with repeater support)
+require_once get_template_directory() . '/inc/carbon-fields-setup.php';

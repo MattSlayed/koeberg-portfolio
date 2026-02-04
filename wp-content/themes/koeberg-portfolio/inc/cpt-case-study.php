@@ -46,41 +46,9 @@ function koeberg_register_case_study_cpt() {
         'hierarchical'       => false,
         'menu_position'      => 5,
         'menu_icon'          => 'dashicons-portfolio',
-        'supports'           => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'supports'           => array('title', 'thumbnail', 'excerpt'),
     );
 
     register_post_type('case_study', $args);
 }
 add_action('init', 'koeberg_register_case_study_cpt');
-
-/**
- * Register Domain taxonomy for case studies
- *
- * @return void
- */
-function koeberg_register_domain_taxonomy() {
-    $labels = array(
-        'name'              => __('Domains', 'koeberg-portfolio'),
-        'singular_name'     => __('Domain', 'koeberg-portfolio'),
-        'search_items'      => __('Search Domains', 'koeberg-portfolio'),
-        'all_items'         => __('All Domains', 'koeberg-portfolio'),
-        'edit_item'         => __('Edit Domain', 'koeberg-portfolio'),
-        'update_item'       => __('Update Domain', 'koeberg-portfolio'),
-        'add_new_item'      => __('Add New Domain', 'koeberg-portfolio'),
-        'new_item_name'     => __('New Domain Name', 'koeberg-portfolio'),
-        'menu_name'         => __('Domains', 'koeberg-portfolio'),
-    );
-
-    $args = array(
-        'labels'            => $labels,
-        'hierarchical'      => false,
-        'public'            => true,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'show_in_rest'      => true,
-        'rewrite'           => array('slug' => 'domain'),
-    );
-
-    register_taxonomy('domain', array('case_study'), $args);
-}
-add_action('init', 'koeberg_register_domain_taxonomy');
