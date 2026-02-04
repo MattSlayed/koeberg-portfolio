@@ -48,7 +48,7 @@ services:
     container_name: koeberg-nginx
     restart: unless-stopped
     volumes:
-      - wordpress_data:/var/www/html:ro
+      - wordpress_data:/var/www/html
     depends_on:
       - wordpress
     networks:

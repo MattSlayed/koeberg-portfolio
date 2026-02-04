@@ -1,10 +1,10 @@
 FROM nginx:alpine
 
-# Copy theme files into the image
-COPY wp-content/themes/koeberg-portfolio /var/www/html/wp-content/themes/koeberg-portfolio
+# Copy theme files to staging location
+COPY wp-content/themes/koeberg-portfolio /usr/src/koeberg-portfolio
 
 # Create nginx configuration
-RUN cat > /etc/nginx/conf.d/default.conf << 'EOF'
+RUN cat > /etc/nginx/conf.d/default.conf << 'NGINXCONF'
 server {
     listen 80;
     server_name _;
@@ -36,7 +36,10 @@ server {
         deny all;
     }
 }
-EOF
+NGINXCONF
 
-# Set proper ownership
-RUN chown -R nginx:nginx /var/www/html/wp-content/themes/koeberg-portfolio
+# Copy and setup entrypoint script
+COPY docker/nginx-entrypoint.sh /usr/local/bin/nginx-entrypoint.sh
+RUN chmod +x /usr/local/bin/nginx-entrypoint.sh
+
+ENTRYPOINT ["nginx-entrypoint.sh"]
