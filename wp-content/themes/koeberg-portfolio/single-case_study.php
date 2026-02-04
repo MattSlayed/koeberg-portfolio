@@ -7,7 +7,7 @@
  * - Primary sections: Problem, Solution, Architecture
  * - Secondary items: category-specific content (data, systems, execution, people, value)
  * - Metrics: quantified results grid
- * - Code samples: handled in Phase 7
+ * - Code samples: syntax-highlighted code with Prism.js
  *
  * @package Koeberg_Portfolio
  */
@@ -85,6 +85,9 @@ while (have_posts()) : the_post();
 
             // Metrics section (handles its own empty check)
             get_template_part('template-parts/case-study-metrics');
+
+            // Code samples section (handles its own empty check)
+            get_template_part('template-parts/case-study-code');
             ?>
 
         </div><!-- .case-study-content -->
