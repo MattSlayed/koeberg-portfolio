@@ -1,0 +1,232 @@
+// ==========================================================================
+// Print Stylesheet - Professional PDF Export
+// ==========================================================================
+// Provides A4-formatted print output for case studies.
+// Inverts dark theme to light scheme for professional PDF sharing.
+// Uses modern break-* properties for page break control.
+
+@media print {
+  // ==========================================================================
+  // Page Setup
+  // ==========================================================================
+
+  @page {
+    size: A4;          // 210mm x 297mm
+    margin: 20mm;      // Professional document margins
+  }
+
+  // ==========================================================================
+  // Color Scheme Inversion (light theme for print)
+  // ==========================================================================
+
+  :root {
+    // Background colors - light scheme
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f8fafc;
+    --color-bg-tertiary: #f1f5f9;
+    --color-bg-card: rgba(241, 245, 249, 0.8);
+
+    // Text colors - dark on light
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-text-muted: #64748b;
+
+    // Accent colors - slightly darker for print contrast
+    --color-accent: #d97706;
+    --color-accent-muted: rgba(217, 119, 6, 0.15);
+    --color-teal: #0d9488;
+    --color-teal-muted: rgba(13, 148, 136, 0.15);
+
+    // Borders - visible on white background
+    --color-border: rgba(15, 23, 42, 0.15);
+    --color-border-hover: rgba(15, 23, 42, 0.25);
+
+    // Semantic aliases
+    --color-primary: var(--color-bg-primary);
+    --color-link: var(--color-accent);
+    --color-link-hover: var(--color-text-primary);
+  }
+
+  // ==========================================================================
+  // Color Preservation
+  // ==========================================================================
+  // Ensure category dots and accents render correctly in print
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  // ==========================================================================
+  // Hide Non-Essential Elements
+  // ==========================================================================
+
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .hamburger,
+  .nav-toggle,
+  #nav-toggle,
+  .site-nav {
+    display: none !important;
+  }
+
+  // ==========================================================================
+  // Layout Adjustments
+  // ==========================================================================
+
+  body {
+    padding-top: 0;
+    background: #ffffff;
+  }
+
+  .case-study-single {
+    padding-top: 0;
+  }
+
+  .container {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  // ==========================================================================
+  // Page Break Control
+  // ==========================================================================
+
+  // Keep these elements together - never split across pages
+  .case-study-header,
+  .case-secondary-item,
+  .metric-card,
+  .code-block {
+    break-inside: avoid;
+  }
+
+  // Prevent orphaned headings at bottom of page
+  .case-primary-label,
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  // Typography orphan/widow control
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  // ==========================================================================
+  // Code Block Print Styling
+  // ==========================================================================
+
+  // Light background for code blocks
+  pre[class*="language-"],
+  code[class*="language-"] {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+  }
+
+  .code-block {
+    border: 1px solid var(--color-border);
+
+    &__pre {
+      overflow: visible;
+      max-height: none;
+    }
+  }
+
+  // ==========================================================================
+  // Metrics Grid Print Adjustment
+  // ==========================================================================
+
+  .case-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10mm;
+
+    .metric-card {
+      flex: 0 0 calc(50% - 5mm);
+      break-inside: avoid;
+      border: 1px solid var(--color-border);
+    }
+  }
+
+  // ==========================================================================
+  // Category Dot Visibility
+  // ==========================================================================
+  // Category colors are bright enough for white background
+  // Ensure dots remain visible with print-color-adjust: exact above
+
+  .case-secondary-item::before {
+    // Force exact color rendering for category dots
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  // ==========================================================================
+  // Additional Print Optimizations
+  // ==========================================================================
+
+  // Ensure links don't show underlines that could be distracting in print
+  a {
+    text-decoration: none;
+    color: var(--color-text-primary);
+  }
+
+  // Tags should have visible borders in print
+  .case-tag {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+  }
+
+  // Primary section labels with darker accent for contrast
+  .case-primary-label {
+    border-bottom-color: var(--color-accent);
+  }
+
+  // Secondary items border visibility
+  .case-secondary-items {
+    border-left-color: var(--color-border);
+  }
+
+  // Category label backgrounds need visibility on light
+  [data-category="data"] .case-secondary-label {
+    color: #b45309;
+    background: rgba(217, 119, 6, 0.15);
+  }
+
+  [data-category="systems"] .case-secondary-label {
+    color: #0369a1;
+    background: rgba(14, 165, 233, 0.15);
+  }
+
+  [data-category="execution"] .case-secondary-label {
+    color: #047857;
+    background: rgba(16, 185, 129, 0.15);
+  }
+
+  [data-category="people"] .case-secondary-label {
+    color: #be185d;
+    background: rgba(236, 72, 153, 0.15);
+  }
+
+  [data-category="value"] .case-secondary-label {
+    color: #6d28d9;
+    background: rgba(139, 92, 246, 0.15);
+  }
+
+  // Code block header adjustment for light theme
+  .code-block__header {
+    background: var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .code-block__language {
+    color: var(--color-accent);
+  }
+
+  .code-block__title {
+    color: var(--color-text-secondary);
+  }
+}
