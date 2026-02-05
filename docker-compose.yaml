@@ -17,6 +17,13 @@ services:
       - wordpress_data:/var/www/html
     expose:
       - "80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.koeberg.rule=Host(`novatekllc.co.za`)"
+      - "traefik.http.routers.koeberg.entrypoints=http,https"
+      - "traefik.http.routers.koeberg.tls=true"
+      - "traefik.http.routers.koeberg.tls.certresolver=letsencrypt"
+      - "traefik.http.services.koeberg.loadbalancer.server.port=80"
     depends_on:
       db:
         condition: service_healthy
