@@ -1,10 +1,10 @@
-FROM wordpress:php8.3-fpm
-
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+FROM wordpress:php8.3-apache
 
 # Copy theme files to staging location (volume will overwrite /var/www/html)
 COPY wp-content/themes/koeberg-portfolio /usr/src/koeberg-portfolio
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Carbon Fields dependencies
 WORKDIR /usr/src/koeberg-portfolio
@@ -17,5 +17,8 @@ WORKDIR /var/www/html
 COPY docker/theme-entrypoint.sh /usr/local/bin/theme-entrypoint.sh
 RUN chmod +x /usr/local/bin/theme-entrypoint.sh
 
+# Enable Apache mod_rewrite for pretty permalinks
+RUN a2enmod rewrite
+
 ENTRYPOINT ["theme-entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]

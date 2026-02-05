@@ -6,20 +6,18 @@ services:
     container_name: koeberg-wordpress
     restart: unless-stopped
     environment:
-      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_HOST: koeberg-db
       WORDPRESS_DB_NAME: ${DB_NAME}
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
       WORDPRESS_DEBUG: ${WP_DEBUG:-0}
-      PHP_UPLOAD_MAX_FILESIZE: 64M
-      PHP_POST_MAX_SIZE: 64M
+      WORDPRESS_HOME: https://novatekllc.co.za
+      WORDPRESS_SITEURL: https://novatekllc.co.za
     volumes:
       - wordpress_data:/var/www/html
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - wp-network
 
   db:
     image: mariadb:10.11
@@ -38,33 +36,7 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-    networks:
-      - wp-network
-
-  nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile.nginx
-    container_name: koeberg-nginx
-    restart: unless-stopped
-    volumes:
-      - wordpress_data:/var/www/html
-    depends_on:
-      - wordpress
-    networks:
-      - wp-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.koeberg.rule=Host(`novatekllc.co.za`)"
-      - "traefik.http.routers.koeberg.entrypoints=https"
-      - "traefik.http.routers.koeberg.tls=true"
-      - "traefik.http.routers.koeberg.tls.certresolver=letsencrypt"
-      - "traefik.http.services.koeberg.loadbalancer.server.port=80"
 
 volumes:
   wordpress_data:
   db_data:
-
-networks:
-  wp-network:
-    driver: bridge
